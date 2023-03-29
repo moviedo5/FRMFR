@@ -1,12 +1,12 @@
 
 # Supplementary material for Functional Response Model with Functional Response (FRMFR)
 
-Supplementary codes and data used in the paper:
+Supplementary codes and data used in the paper Darbalaei et al. (2022).
 
-Darbalaei, M., Amini, M., Febrero-Bande, M., & Oviedo-de-la-Fuente, M.
-O. D. (2022). *Functional Regression Models with Functional Response:
-New Approaches and a Comparative Study*. arXiv preprint
-[arXiv:2207.04773](https://doi.org/10.48550/arXiv.2207.04773).
+<!--
+
+Darbalaei, M., Amini, M., Febrero-Bande, M., & Oviedo-de-la-Fuente, M. O. D. (2022). *Functional Regression Models with Functional Response: New Approaches and a Comparative Study*. arXiv preprint [arXiv:2207.04773](https://doi.org/10.48550/arXiv.2207.04773).
+-->
 
 Please cite this paper as:
 
@@ -254,6 +254,15 @@ Qi, X., & Luo, R. (2019). Nonlinear function-on-function additive model with mul
 -->
 
 <div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-darbalaei2022functional" class="csl-entry">
+
+Darbalaei, Mohammad, Morteza Amini, Manuel Febrero-Bande, and Manuel
+Oviedo de-la Fuente. 2022. “Functional Regression Models with Functional
+Response: New Approaches and a Comparative Study.” *arXiv Preprint
+arXiv:2207.04773*. <https://doi.org/10.48550/arXiv.2207.04773>.
+
+</div>
 
 <div id="ref-Fanaee-T2014" class="csl-entry">
 

@@ -4,10 +4,12 @@ bibliography: bibliografia.bib
 ---
 
 #  Supplementary material for Functional Response Model with Functional Response (FRMFR) 
-Supplementary codes and data used in the paper:
+Supplementary codes and data used in the paper @darbalaei2022functional.
+
+<!--
 
 Darbalaei, M., Amini, M., Febrero-Bande, M., & Oviedo-de-la-Fuente, M. O. D. (2022). *Functional Regression Models with Functional Response: New Approaches and a Comparative Study*. arXiv preprint [arXiv:2207.04773](https://doi.org/10.48550/arXiv.2207.04773).
-
+-->
 
 Please cite this paper as:
 
