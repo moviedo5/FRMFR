@@ -47,14 +47,14 @@ install.packages(url, repos = NULL)
 
 To compares our proposed methods (namely, FLMFR, FSAMFR, and FKAMFR,
 which are available in the `fda.usc` package (devel version) through the
-commands `fregre.lm.fr`, `fregre.sam.fr` and `fregre.kam.fr`) with the
+commands `fregre.mlm.fr`, `fregre.sam.fr` and `fregre.kam.fr`) with the
 four mentioned competitor methods (namely, PFR, FAMM, LSC, and DISC).
 
 ## 2. `refund` package
 
 PFR and FAMM methods are available in the `refund` package through the
 command `pffr`, where the argument formula allows us to include linear
-`ffpc`, `ff` or nonlinear term `sff`.
+`ffpc`, `ff` or nonlinear term `sff`. The authors considered the latter as an experimental feature.
 
 To install refund package from CRAN or Github.
 
@@ -68,13 +68,12 @@ devtools::install_github("refunders/refund")
 
 ## 3. `FRegSigCom` package
 
-The authors considered the latter as an experimental feature. LSC and
-DISC methods are available in the `FRegSigCom` package through the
+LSC and DISC methods are available in the `FRegSigCom` package through the
 commands `cv.sigcom` and `cv.nonlinear`.
 
 This package is not currently maintained and its latest version was
-published in November 2018 but, anyway, it can be downloaded and
-installed from the Packages/Archive section of CRAN.
+published in November 2018 but, it can be downloaded and
+installed from the Packages/Archive section of CRAN or through the .tar.gz file in pkg section.
 
 ``` r
 devtools::install_github("moviedo5/FRMFR/pkg/FRegSigCom")
@@ -102,16 +101,14 @@ library(fda.usc.devel)
 
 # Real Data Applications
 
-Consult a detailed documentation of the data examples and R code of
-used.
+Consult a detailed documentation of the data examples and R code.
 
 ## 1. Air Quality Data
 
-Our last example is the Air Quality dataset (AQI) available from the UCI
-machine learning repository Qi and Luo (2019). AQI is a popular dataset
+The first example is the Air Quality dataset (AQI) available from the UCI
+machine learning repository (Qi and Luo (2019)). AQI is a popular dataset
 consisting of five metal oxide chemical sensors embedded into an air
-quality multisensor device. The column names in the dataset begin with
-*PT*. The sensors are labeled with:
+quality multisensor device. The sensors are labeled with:
 
 - Carbon monoxide (`CO`),
 - Non-methane hydrocarbons (`NMHC`),
@@ -128,16 +125,16 @@ names(AirQuality)
 
 ![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
+The object `Airquality` contains the daily profiles (measured as hourly averaged concentrations) 
+of the signals along with Temperature (`Temp`) and relative humidity (`RH`) considered as external factors. 
+
 The goal of this study is to predict the content of Benzene (`C6H6`)
 obtained through an independent analyzer considered the Ground Truth.
-These sensors were collected as 24 hourly averaged concentration values
-each day jointly with the relative humidity (`rH`) as an external
-factor.
 
-- `/RealDataApplications/BikeSharing.R`: Code for example Air Quality
+- `/RealDataApplications/AirQuality.R`: Code for example Air Quality
 
 ``` r
-source("/RealDataApplications/BikeSharing.R")
+source("/RealDataApplications/AirQuality.R")
 ```
 
 <!--+ AirQualityUCI.xlsx: Air Quality Data.-->
@@ -178,11 +175,11 @@ natural heteroskedasticity. Ignoring three curves with missing values,
 the dataset contains 102 trajectories, each with 24 data points (hourly)
 for all variables.
 
-- `/RealDataApplications/AirQuality.R`: Code for Bike–sharing data
+- `/RealDataApplications/BikeSharing.R`: Code for Bike–sharing data
   example (high computational time)
 
 ``` r
-source("/RealDataApplications/AirQuality.R")
+source("/RealDataApplications/BikeSharing.R")
 ```
 
 <!--+ bike-sharing2.R: Code for Bike--sharing data example.
