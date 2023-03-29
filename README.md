@@ -1,10 +1,11 @@
 
 # Supplementary material for Functional Response Model with Functional Response (FRMFR)
 
-Supplementary codes and data used in the paper: Darbalaei, M., Amini,
-M., Febrero-Bande, M., & Oviedo-de-la-Fuente, M. O. D. (2022).
-*Functional Regression Models with Functional Response: New Approaches
-and a Comparative Study*. arXiv preprint
+Supplementary codes and data used in the paper:
+
+Darbalaei, M., Amini, M., Febrero-Bande, M., & Oviedo-de-la-Fuente, M.
+O. D. (2022). *Functional Regression Models with Functional Response:
+New Approaches and a Comparative Study*. arXiv preprint
 [arXiv:2207.04773](https://doi.org/10.48550/arXiv.2207.04773).
 
 Please cite this paper as:
@@ -118,12 +119,6 @@ quality multisensor device. The column names in the dataset begin with
 - Ozone (`O3`) because it is supposed that its measures are related with
   the respective pollutants.
 
-The goal of this study is to predict the content of Benzene (`C6H6`)
-obtained through an independent analyzer considered the Ground Truth.
-These sensors were collected as 24 hourly averaged concentration values
-each day jointly with the relative humidity (`rH`) as an external
-factor.
-
 ``` r
 data("AirQuality")
 names(AirQuality)
@@ -131,29 +126,19 @@ names(AirQuality)
 
     ## [1] "df"   "C6H6" "CO"   "NMHC" "NOx"  "NO2"  "O3"   "Temp" "RH"
 
-``` r
-par(mfrow=c(2,3))
-plot(AirQuality$NO2,col="grey")
-lines(func.mean(AirQuality$NO2))
-plot(AirQuality$CO,col="grey")
-lines(func.mean(AirQuality$CO))
-plot(AirQuality$NMHC,col="grey")
-lines(func.mean(AirQuality$NMHC))
-plot(AirQuality$NOx,col="grey")
-lines(func.mean(AirQuality$NOx))
-plot(AirQuality$C6H6,col="grey")
-lines(func.mean(AirQuality$C6H6))
-plot(AirQuality$Temp,col="grey")
-lines(func.mean(AirQuality$Temp))
-```
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
-![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+The goal of this study is to predict the content of Benzene (`C6H6`)
+obtained through an independent analyzer considered the Ground Truth.
+These sensors were collected as 24 hourly averaged concentration values
+each day jointly with the relative humidity (`rH`) as an external
+factor.
+
+- `/RealDataApplications/BikeSharing.R`: Code for example Air Quality
 
 ``` r
-# source("BikeSharing.R")
+source("/RealDataApplications/BikeSharing.R")
 ```
-
-- `./inst/script/data-real-aqi.R`: Code for example Air Quality.
 
 <!--+ AirQualityUCI.xlsx: Air Quality Data.-->
 
@@ -164,57 +149,27 @@ the Bike-sharing data (Fanaee-T and Gama 2014) as our first example.
 This dataset is collected by [Capital Bikeshare System (CBS), Washington
 D.C., USA](https://ride.capitalbikeshare.com/system-data). The number of
 casual bike rentals (`NCBR`) is considered as our functional response
-variable
+variable and four functional predictors:
 
-Functional predictors: + Temperature (`T`), + Humidity (`H`), + Wind
-Speed (`WS`) and + Feeling Temperature (`FT`)
+- Temperature (`T`),
+- Humidity (`H`),
+- Wind Speed (`WS`) and
+- Feeling Temperature (`FT`)
+
+`data("AirQuality")` included in `fda.usc.devel` packages:
+
+``` r
+data("BikeSharing")
+names(BikeSharing)
+```
+
+    ## [1] "df"        "logNBCR"   "temp"      "feeltemp"  "humidity"  "windspeed"
 
 The corresponding plots are displayed in Figure XXX.
 
-``` r
-data("AirQuality")
-names(AirQuality)
-```
+    ## [1] "df"        "logNBCR"   "temp"      "feeltemp"  "humidity"  "windspeed"
 
-    ## [1] "df"   "C6H6" "CO"   "NMHC" "NOx"  "NO2"  "O3"   "Temp" "RH"
-
-``` r
-listfinal <- AirQuality
-dim(listfinal$df)
-```
-
-    ## [1] 389   2
-
-``` r
-al=lapply(listfinal[-1],function(v) which(fda.usc.devel:::is.na.fdata(v)))
-al=unique(rapply(al,drop))
-listfinal=subset(listfinal,-al)
-dim(listfinal$df)
-```
-
-    ## [1] 357   2
-
-``` r
-par(mfrow=c(2,3))
-plot(listfinal$NMHC,col="grey")
-lines(func.mean(listfinal$NMHC))
-plot(listfinal$CO,col="grey")
-lines(func.mean(listfinal$CO))
-plot(listfinal$NOx,col="grey")
-lines(func.mean(listfinal$NMHC))
-plot(listfinal$O3,col="grey")
-lines(func.mean(listfinal$O3))
-plot(AirQuality$RH,col="grey")
-lines(func.mean(listfinal$RH))
-plot(listfinal$C6H6,col="grey")
-lines(func.mean(listfinal$C6H6))
-```
-
-![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
-
-``` r
-# source("AirQuality.R")
-```
+![](README_files/figure-gfm/unnamed-chunk-11-1.png)<!-- -->
 
 These variables are recorded each hour from January 1, 2011, to December
 31, 2012. Similar to Kim et al. (2018), we only consider the data for
@@ -223,7 +178,12 @@ natural heteroskedasticity. Ignoring three curves with missing values,
 the dataset contains 102 trajectories, each with 24 data points (hourly)
 for all variables.
 
-- `./inst/script/bike-sharing2.R`: Code for Bike–sharing data example.
+- `/RealDataApplications/AirQuality.R`: Code for Bike–sharing data
+  example (high computational time)
+
+``` r
+source("/RealDataApplications/AirQuality.R")
+```
 
 <!--+ bike-sharing2.R: Code for Bike--sharing data example.
 + hour.csv: Bike--sharing data.-
@@ -235,39 +195,39 @@ Daily profiles of Electricity Price and Demand, both measured hourly,
 are obtained from two biannual periods separated by ten years: 2008-2009
 and 2018-2019 (source:omie.es).
 
+- `/RealDataApplications/omie2008vs2018.R`: Code for Electricity Demand
+  and Price example.
+
 ``` r
 data(omel2008)
-par(mfrow=c(2,2))
-plot(omel2008$precio,col="grey")
-lines(func.mean(omel2008$precio),lwd=2)
-plot(omel2008$energia,col="grey")
-lines(func.mean(omel2008$energia),lwd=2)
-data(omel2018)
-plot(omel2018$precio,col="grey")
-lines(func.mean(omel2018$precio),lwd=2)
-plot(omel2018$energia,col="grey")
-lines(func.mean(omel2018$energia),lwd=2)
+names(omel2008)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+    ## [1] "df"      "precio"  "energia"
 
-``` r
-# library(lubridate)
-# plot(omel2008$precio,col=year(omel2008$df$ifecha)-2007)
-# plot(omel2008$energia,col=year(omel2008$df$ifecha)-2007)
-# data(omel2018)
-# omel2018 <- ldat
-# plot(omel2018$precio,col=year(omel2018$df$ifecha)-2015)
-# plot(omel2018$energia,col=year(omel2018$df$ifecha)-2015)
-```
+The corresponding plots are displayed in Figure XXX.
+
+![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+
+<!-- # library(lubridate) -->
+<!-- # plot(omel2008$precio,col=year(omel2008$df$ifecha)-2007) -->
+<!-- # plot(omel2008$energia,col=year(omel2008$df$ifecha)-2007) -->
+<!-- # data(omel2018) -->
+<!-- # omel2018 <- ldat -->
+<!-- # plot(omel2018$precio,col=year(omel2018$df$ifecha)-2015) -->
+<!-- # plot(omel2018$energia,col=year(omel2018$df$ifecha)-2015) -->
 
 Profiles for Electricity Demand (first row) and Electricity Price
 (second row) for the periods 2008-09 (first column) and 2018-19 (second
 column). The black line corresponds to the functional mean of each
 dataset.
 
-- `./inst/script/Exampleomel.R`: Code for Electricity Demand and Price
-  example.
+- `/RealDataApplications/omie2008vs2018.R`: Code for Electricity Demand
+  and Price example.
+
+``` r
+source("/RealDataApplications/omie2008vs2018.R")
+```
 
 <!--
 + Exampleomel.R: Code for Electricity Demand and Price example.
