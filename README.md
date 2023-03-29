@@ -113,7 +113,9 @@ quality multisensor device. The sensors are labeled with:
 - Carbon monoxide (`CO`),
 - Non-methane hydrocarbons (`NMHC`),
 - total Nitrogen Oxides (`NOx`),
-- Ozone (`O3`) because it is supposed that its measures are related with
+- Ozone (`O3`) 
+
+because it is supposed that its signals are related with
   the respective pollutants.
 
 ``` r
