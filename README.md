@@ -106,7 +106,7 @@ Consult a detailed documentation of the data examples and R code.
 ## 1. Air Quality Data
 
 The first example is the Air Quality dataset (AQI) available from the UCI
-machine learning repository (Qi and Luo (2019)). AQI is a popular dataset
+machine learning repository @Qi2019. AQI is a popular dataset
 consisting of five metal oxide chemical sensors embedded into an air
 quality multisensor device. The sensors are labeled with:
 
