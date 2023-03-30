@@ -163,10 +163,10 @@ lines(func.mean(listfinal$C6H6))
 The goal of this study is to predict the content of Benzene (`C6H6`) obtained through an independent analyzer considered the Ground Truth. 
 These sensors were collected as 24 hourly averaged concentration values each day jointly with the relative humidity (`rH`) as an external factor. 
 
-+ `/RealDataApplications/BikeSharing.R`: Code for example Air Quality
++ `/RealDataApplications/AirQuality.R`: Code for  Bike--sharing data example (high computational time)
 
-```{r , eval =F,message=F,warning=F}
-source("/RealDataApplications/BikeSharing.R")
+```{r , eval = F}
+source("/RealDataApplications/AirQuality.R")
 ```
 <!--+ AirQualityUCI.xlsx: Air Quality Data.-->
  
@@ -224,13 +224,13 @@ lines(y[lesp],lwd=2)
 These variables are recorded each hour from January 1, 2011, to December 31, 2012. Similar to @Kim2018, we only consider the data for Saturday trajectories, and `NBCR` is log--transformed to avoid its natural heteroskedasticity. Ignoring three curves with missing values, the dataset contains 102 trajectories, each with 24 data points (hourly) for all variables. 
 
 
-+ `/RealDataApplications/AirQuality.R`: Code for  Bike--sharing data example (high computational time)
 
-```{r , eval = F}
-source("/RealDataApplications/AirQuality.R")
+
++ `/RealDataApplications/BikeSharing.R`: Code for example Air Quality
+
+```{r , eval =F,message=F,warning=F}
+source("/RealDataApplications/BikeSharing.R")
 ```
-
-
 
 <!--+ bike-sharing2.R: Code for Bike--sharing data example.
 + hour.csv: Bike--sharing data.-
