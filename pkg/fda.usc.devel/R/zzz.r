@@ -39,13 +39,13 @@ globalVariables('icnt')
       #paste("----------------------------------------------------------------------------------\n",pkg.info["Title"]),"\n",
       #	 "Functional Data Analysis in R \n",
       #paste(" fda.usc version ", pkg.info["Version"]," (built on ", pkg.info["Date"], ") is now loaded\n", sep=""),
-      paste(" fda.usc.devel is running sequentially usign foreach package\n"),
-      paste(" Please, execute ops.fda.usc() once to run in local parallel mode\n"),
-      paste(" Deprecated functions: min.basis, min.np, anova.hetero, anova.onefactor, anova.RPm\n"),
-      paste(" New functions: optim.basis, optim.np, fanova.hetero, fanova.onefactor, fanova.RPm, 
-            fregre.lm.fr, fregre.sam.fr, fregre.kam.fr\n"),      
+paste("fda.usc.devel is running sequentially usign foreach package\n"),
+paste("Please, execute ops.fda.usc() once to run in local parallel mode\n"),
+paste("Deprecated functions (v-2.0.0): min.basis, min.np, anova.hetero,\nanova.onefactor and anova.RPm are renamed by: optim.basis, optim.np, \nfanova.hetero, fanova.onefactor, fanova.RPm\n"), 
+paste("New functions (v-2.1.1): fregre.mlm.fr, fregre.lm.fr, fregre.sam.fr\nand fregre.kam.fr\n"),      
             #" ops.fda.usc() changes the parameters of the package\n",
       "----------------------------------------------------------------------------------\n"
     )
   }
   
+# fda.usc 2.0.02019-11-14

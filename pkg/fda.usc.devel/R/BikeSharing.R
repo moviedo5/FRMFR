@@ -66,7 +66,3 @@
 #' 
 NULL
 
-# referenciar Amini et al 2022 (Arxiv) y
-# Fanaee-T, H. and Gama, J. (2014). Event labeling combining ensemble 
-# detectors andhttps://es.overleaf.com/project/603fdf898f1848b32701f41d
-# background knowledge. Progress in Artificial Intelligence, 2(2):113–127.

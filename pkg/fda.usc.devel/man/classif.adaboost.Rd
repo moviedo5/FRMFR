@@ -110,8 +110,8 @@ Alfaro, E., Gamez, M. and Garcia, N. (2013): 'adabag: An R Package for Classific
 Boosting and Bagging'.  \emph{Journal of Statistical Software}, Vol 54, 2, pp. 1-35.
 }
 \seealso{
-See Also as: \code{\link{classif.glm}},  \code{\link{classif.gsam}},  \code{\link{classif.svm}} and other classifiers.\cr Alternative method:
-\code{\link{classif.bootstrap}}.
+See Also as: \code{\link{classif.glm}},  \code{\link{classif.gsam}},  \code{\link{classif.svm}}
+ and other classifiers.
 }
 \author{
 Febrero-Bande, M. and Oviedo de la Fuente, M.

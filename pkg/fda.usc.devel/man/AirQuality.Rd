@@ -24,7 +24,7 @@
 \item{\code{NO2}:}{ (log transformation of) daily curves of Nitrogen Dioxide concentrations measured every hour  (in microg/m^3).}
 \item{\code{O3}:}{ (log transformation of) daily curves of Ozone concentrations measured every hour  (in microg/m^3).}
 \item{\code{Temp}:}{   (log transformation of) daily curves of temperatura measured every hour (in Celsius) }
-\item{\code{RH}:}{  daily curves of relative humidity measured every hour (in percentage) }
+\item{\code{rH}:}{  daily curves of relative humidity measured every hour (in percentage) }
 } 
 }
 }

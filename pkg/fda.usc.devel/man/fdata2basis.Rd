@@ -3,9 +3,9 @@
 \name{fdata2basis}
 \alias{fdata2basis}
 \alias{summary.basis.fdata}
-\title{Compute fucntional coefficients from functional data represented in a base of functions}
+\title{Compute the representation in a basis of a curve}
 \usage{
-fdata2basis(fdataobj, basis, method = c("grid", "inprod"))
+fdata2basis(fdataobj, basis, method = c("grid", "inprod"), center = TRUE)
 
 \method{summary}{basis.fdata}(object, draw = TRUE, index = NULL, ...)
 }
@@ -15,8 +15,11 @@ fdata2basis(fdataobj, basis, method = c("grid", "inprod"))
 \item{basis}{a functional basis object defining the basis}
 
 \item{method}{character string, if it is "grid" the fdata object is evaluated in the grid (\code{argvals} of fdata),
-if it is "inprod" the basis representation of functional data is computed by inner product 
+if it is "inprod" the basis representation of functional data is computed by inner products 
 (\code{\link{inprod.fdata}(fdataobj,basis)}).}
+
+\item{center}{a logical value,  if  \code{TRUE} (by default), the function 
+centres the curves by subtracting the functional mean}
 
 \item{object}{\code{basis.fdata} class object calculated by: \code{\link{fdata2basis}}}
 
@@ -30,18 +33,20 @@ Otherwise, index vector indicates taht curvesare plotted.}
 \value{
 fdata2basis \code{fdata2bais} function return: 
 \itemize{
-\item {coef}{a matrix or two-dimensional array of coefficients.}
-\item {basis}{basis of \code{\link{fdata}} class evaluated in the same grid of \code{fdataobj}. } 
+\item {coefs}{ a matrix with the expansion coefficients for each curve.}
+\item {basis}{ basis of \code{\link{fdata}} class evaluated in the same grid of \code{fdataobj}.} 
+\item {fdataobj}{ the original \code{fdataobj} object.} 
+\item {mean}{ functional mean of \code{fdataobj}.} 
 }
 
-summary function return: 
+\code{summary} function return: 
 \itemize{
-\item {R}{a matrix with a measure similar to R-sq for each curve aproximation (by row) and number of basis elements (by column).}
+\item {fdata.est}{ The reconstruction of \code{fdataobj} in the \code{basis} expansion}
+\item {R}{ A vector with a measure similar to R-sq for each curve aproximation. }
 }
 }
 \description{
-Compute fucntional coefficients from functional data (\code{\link{fdata}} class object) 
-represented in a basis (fixed of data-driven basis).
+Compute the functional coefficients in a (fixed or data-driven) basis of a curve (\code{\link{fdata}} class object)
 }
 \examples{
 \dontrun{

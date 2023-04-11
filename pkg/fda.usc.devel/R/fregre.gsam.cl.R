@@ -98,6 +98,7 @@
 #' Ramsay, James O., and Silverman, Bernard W. (2006), \emph{ Functional Data
 #' Analysis}, 2nd ed., Springer, New York.
 #' @keywords regression
+#' @noRd 
 #' @examples
 #' \dontrun{
 #' library(fda.usc.devel)
@@ -163,7 +164,7 @@
 #' lines(newy-pred2,col=2)
 #' lines(newy-pred3,col=3)
 #' }
-#' @export
+# @export
 fregre.gsam.cl <- function (formula
                          #  , family = gaussian()
                            , data = list(), weights = NULL

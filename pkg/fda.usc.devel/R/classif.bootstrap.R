@@ -35,7 +35,7 @@
 #'  \item \code{alpha}, \code{numeric}, error rate value used to ensamble the \code{B} models. 
 #'  \item \code{error}, \code{numeric}, the error values of missclassification  (by default is the accuracy).
 ##' }
-#' 
+#' @noRd 
 #' @details 
 #' The ensamble (final) classifier is  a linear combination of all of the \code{B} classifiers
 #' using the \eqn{\alpha}{\alpha} coefficients.  Breiman coefficient \eqn{\alpha}=1/2 ln((1-err)/err) is computed for each classifier.
@@ -50,7 +50,7 @@
 #' 
 #' Breiman, L. (1998): 'Arcing classifiers'. \emph{The Annals of Statistics}, Vol 26, 3, pp. 801-849.
 #' 
-#' @keywords classif 
+#' @keywords internal
 #' @examples
 #' \dontrun{
 #' data(phoneme)
@@ -98,7 +98,7 @@
 # function (x, response, boot = "convex", nb = NULL, smo = 0.05, 
 #               Nhull = 4, Nnbh = NULL, weights, metric = NULL) 
   
-#' @export  classif.bootstrap
+# @export  classif.bootstrap
 classif.bootstrap <- function(formula, data, weights="equal", B = 50
          , par.boot = list( nb = NULL, smo = 0, Nhull  =NULL, Nnbh = NULL) 
          , classif="classif.glm", par.classif, verbose = FALSE, ...) {
@@ -231,7 +231,9 @@ classif.bootstrap <- function(formula, data, weights="equal", B = 50
 # predict.classif.bootstrap <- fda.usc.devel:::predict.classif.bootstrap
 # mfdata.cen <- fda.usc.devel:::mfdata.cen
 
-#' @export  classif.bootstrap2
+# @export  classif.bootstrap2
+# @keywords internal
+# @noRd
 classif.bootstrap2 <- function(formula, data, weights="equal", B = 50
                                , par.boot = list( nb = NULL, smo = 0, Nhull  =NULL, Nnbh = NULL) 
                                , classif="classif.glm", par.classif, verbose = FALSE, ...) {

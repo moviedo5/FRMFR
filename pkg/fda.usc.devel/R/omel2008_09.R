@@ -21,8 +21,8 @@
 #' }
 #' @docType data
 #' @keywords datasets
-#' @name omel2008
-#' @usage data(omel2008)
+#' @name omel2008_09
+#' @usage data(omel2008_09)
 #' @source \url{https://www.omie.es/es/market-results/daily/daily-market/daily-hourly-price}
 #' @references 
 #' Febrero-Bande, M., Gonzalez-Manteiga, W., Oviedo De La Fuente, M. (2019). 

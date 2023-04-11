@@ -100,6 +100,7 @@
 #' Ramsay, James O., and Silverman, Bernard W. (2006), \emph{ Functional Data
 #' Analysis}, 2nd ed., Springer, New York.
 #' @keywords regression
+#' @noRd 
 #' @examples
 #' \dontrun{
 #' data(aemet)
@@ -170,7 +171,7 @@
 #' lines(newy-pred2,col=3)
 #' }
 #' 
-#' @export
+# @export
 fregre.gsam.con <- function (formula
                          #  , family = gaussian()
                            , data = list()#, weights = NULL

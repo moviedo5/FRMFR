@@ -49,8 +49,10 @@
 #' }
 #' 
 #' @author Febrero-Bande, M. and Oviedo de la Fuente, M.
-#' @seealso See Also as: \code{\link{classif.glm}},  \code{\link{classif.gsam}},  \code{\link{classif.svm}} and other classifiers.\cr Alternative method:
-#' \code{\link{classif.bootstrap}}.
+#' 
+#' @seealso See Also as: \code{\link{classif.glm}},  \code{\link{classif.gsam}},  \code{\link{classif.svm}}
+#'  and other classifiers.
+# \cr Alternative method: \code{\link{classif.bootstrap}}.
 
 #' @references 
 #' Breiman, L. (1998): 'Arcing classifiers'. \emph{The Annals of Statistics}, Vol 26, 3, pp. 801-849.\cr

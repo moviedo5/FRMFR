@@ -33,8 +33,8 @@
 #' }
 #' }
 #' 
-#' @seealso See also  \code{\link{classif.bootstrap}}
-#' 
+# @seealso See also  \code{\link{classif.bootstrap}}
+#' @noRd  
 #' @author
 #' Manuel Febrero-Bande, Manuel Oviedo de la Fuente 
 #' @examples
@@ -56,7 +56,7 @@
 #' dat.naive <- group.bootstrap(dat,"glearn", boot = "smooth", smo = 0, nb = c(5,5,25,5,5))
 #' plot(dat.naive,var.name="glearn")
 #' }
-#' @export group.bootstrap
+# @export group.bootstrap
 group.bootstrap <-function(x, response #,boot = "convex"
                            , nb = NULL
                            , smo = 0, Nhull = NULL, Nnbh = NULL

@@ -2,7 +2,15 @@
 library(fda.usc.devel)
 library(FRegSigCom)
 library(refund)
-
+# Pr y En--->fda.usc.devel no poner añudas
+# @noRd o 
+#' @keywords internal ponerlo en las funciones auxiliares
+#' Price por Pr
+#' Energia por En
+#' logNBCR --> log(NBCR+1) # incluir 1 
+#' Exportar Minverse-->hacer ayuda
+#' fregre.gsam.cl/con, classif.bootstrap
+#' 
 data("omel2018")
 npx=4
 npy=4

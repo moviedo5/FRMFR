@@ -4,9 +4,8 @@ Title: Functional Data Analysis and Utilities for Statistical Computing
 Version: 2.1.1
 Date: 2022-10-19
 Authors@R: c(person(given = "Manuel", family = "Febrero-Bande", role = "aut", email = "manuel.febrero@usc.es", comment = c(ORCID = "0000-0002-9536-2973")),person(given = "Manuel", family = "Oviedo-de la Fuente", role = c("aut","cre"), email="manuel.oviedo@udc.es", comment = c(ORCID = "0000-0001-7360-3249")))
-Depends: R (>= 3.5.0), fda, splines, MASS, mgcv
-Imports: methods, grDevices, graphics, utils, stats, nlme, doParallel,
-        parallel, iterators, foreach, kSamples, fda.usc
+Depends: R (>= 3.5.0), fda, splines, MASS, mgcv 
+Imports: methods, grDevices, graphics, utils, stats, nlme, doParallel,  parallel, iterators, foreach, kSamples, fda.usc
 Suggests: knitr
 Description: Routines for exploratory and descriptive analysis of functional data such as depth measurements, atypical curves detection, regression models, supervised classification, unsupervised classification and functional analysis of variance.
 License: GPL-2
@@ -16,7 +15,3 @@ NeedsCompilation: yes
 Repository: CRAN
 Encoding: UTF-8
 RoxygenNote: 7.2.3
-Packaged: 2023-03-29 10:12:07 UTC; moviedo
-Author: Manuel Febrero-Bande [aut] (<https://orcid.org/0000-0002-9536-2973>),
-  Manuel Oviedo-de la Fuente [aut, cre]
-    (<https://orcid.org/0000-0001-7360-3249>)

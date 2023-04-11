@@ -1,4 +1,21 @@
-Minverse<-function (X, tol = sqrt(.Machine$double.eps)) 
+#' Generalized inverse
+#' 
+#' @description This function computes the Matrix inverse.
+#' @param X a square numeric or complex matrix. 
+#' @param tol the tolerance for detecting linear dependencies in the columns of \code{a}. 
+#' The default is `.Machine$double.eps.`
+#' @details By default it uses the \code{\link{solve}} function. 
+#' If system is computationally singular, the matrix inverse is computed by
+#'  \code{\link{svd}} function (using the effective rank).
+#' @return {  Return the inverse of \code{a} }
+#' @author Manuel Febrero-Bande, Manuel Oviedo de la Fuente
+#' \email{manuel.oviedo@@udc.es}
+#' @seealso See Also as \code{\link{solve}}, \code{\link{svd}} and \code{\link{complex}} 
+#' @keywords utilities
+#' @export
+
+
+Minverse <- function (X, tol = sqrt(.Machine$double.eps)) 
 {
   if (length(dim(X)) > 2L || !(is.numeric(X) || is.complex(X))) 
     stop("'X' must be a numeric or complex matrix")

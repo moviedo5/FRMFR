@@ -1,0 +1,7 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.gitattributes$
+^\.gitignore$
+^\.Rhistory*$
+(^|/)\.git[^/]*$
+(^|/)\.vscode[^/]*$

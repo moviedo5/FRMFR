@@ -12,11 +12,16 @@
 #' @param object \code{basis.fdata} class object calculated by: \code{\link{fdata2basis}}
 #' @param draw logical, original curves  and their basis representation are plotted
 #' @param index vector, by default (if NULL) the first n curves are plotted, where n = min(4, length(fdataobj)). 
+<<<<<<< HEAD
 #' Otherwise, index vector indicates taht curvesare plotted.
 #' @param center  a logical value,  if  \code{TRUE} (by default), the function 
 #' centres the curves by subtracting the functional mean
 #' @param \dots Further arguments passed to or from other methods.
 #' @return fdata2basis \code{fdata2bais} function return: 
+=======
+#' Otherwise, \code{index} vector indicates the indexes of curves for drawing.
+#' @return fdata2basis \code{fdata2basis} function return: 
+>>>>>>> 4879538160c33fc89191c578d39f5b915cd88483
 #' \itemize{
 #' \item {coefs}{ a matrix with the expansion coefficients for each curve.}
 #' \item {basis}{ basis of \code{\link{fdata}} class evaluated in the same grid of \code{fdataobj}.} 
@@ -98,7 +103,13 @@ fdata2basis <- function(fdataobj, basis, method=c("grid","inprod"),center=TRUE){
 
 #' @rdname fdata2basis
 #' @export
+<<<<<<< HEAD
 summary.basis.fdata=function(object,draw=TRUE, index=NULL,...) {
+=======
+
+summary.basis.fdata=function(object,draw=TRUE, index=NULL) {
+>>>>>>> 4879538160c33fc89191c578d39f5b915cd88483
+
   cat("\n     - SUMMARY -\n")
   le <- ncol(object$coefs)
   n <- nrow(object$coefs)
@@ -137,7 +148,11 @@ summary.basis.fdata=function(object,draw=TRUE, index=NULL,...) {
 #    R2[,l] <- 1 - norm.fdata(fdata.est-object$fdataobj-object$mean)^2/norm.fdata(object$fdataobj)^2    
 #  }
 #if (draw){
+<<<<<<< HEAD
     R<- 1 - norm.fdata(fdata.est-object$fdataobj-object$mean)^2/norm.fdata(object$fdataobj,...)^2  
+=======
+    R<- 1 - norm.fdata(fdata.est-object$fdataobj)^2/norm.fdata(object$fdataobj)^2  
+>>>>>>> 4879538160c33fc89191c578d39f5b915cd88483
 #}
   if (is.null(index)) {
     ymin <- min(4,n);     index<- 1:ymin

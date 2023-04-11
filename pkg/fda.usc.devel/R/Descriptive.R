@@ -285,5 +285,3 @@ func.med.L1 <- function(fdataobj,
   attr(y1,"niter") <- iter
   return(y1)
 }
-
-

@@ -1,5 +1,6 @@
 #' @aliases predict.fregre.gsam.cl
 #' @rdname predict.fregre.lm.fr
+#' @noRd  
 #' @export 
 predict.fregre.gsam.cl <- function(object, newx = NULL,
                                 type = "response",...){

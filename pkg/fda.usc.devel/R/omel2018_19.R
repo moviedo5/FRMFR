@@ -23,11 +23,25 @@
 #' 
 #' @docType data
 #' @keywords datasets
-#' @name omel2018
-#' @usage data(omel2018)
+#' @name omel2018_19
+#' @usage data(omel2018_19)
 #' @source \url{https://www.omie.es/es/market-results/daily/daily-market/daily-hourly-price}
 #' @references 
 #' Febrero-Bande, M., Gonzalez-Manteiga, W., Oviedo De La Fuente, M. (2019). 
 #' Variable selection in functional additive regression models.
 #' Computational Statistics, 34(2), 469-487.
 NULL
+
+# data("omel2008")
+# names(omel2008)[-1] <- c("Pr","En") 
+# omel2008$Pr$names$main <- "Electricity Price 2008−09"
+# omel2008$En$names$main <- "Electricity Demand 2008−09"
+# omel2008_09 <- omel2008
+# save(omel2008_09,file="omel2008_09.rda")
+# 
+# data("omel2018")
+# names(omel2018)[-1] <- c("Pr","En") 
+# omel2018$Pr$names$main <- "Electricity Price 2018−19"
+# omel2018$En$names$main <- "Electricity Demand 2018−19"
+# omel2018_19 <- omel2018
+# save(omel2018_19,file="omel2018_19.rda")
