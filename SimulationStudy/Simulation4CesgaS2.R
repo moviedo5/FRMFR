@@ -332,6 +332,7 @@ ejecmodels=function(imodel,
 # lines(prSCNL[i],col="green",lty=2)
 # }
 
+# Modificación para ejecutar en un centro de calculo (traducir) *******************
 cesga <- FALSE
 if (cesga) {
   library(doSNOW)
@@ -376,14 +377,16 @@ for (ni in 1:replic){
                                    nS=51,
                                    rho=ejec[j,"rho"])
                     }
-  j<-1
-  res <- ejecmodels(imodel=ejec[j,"imod"],
-                     N=ejec[j,"N"],
-                     ivar=ejec[j,"ivar"],
-                     Ntest=100,
-                     nT=71,
-                     nS=51,
-                     rho=ejec[j,"rho"])
+  # j<-1 # 1 ejecucion (borrar)
+  # res <- ejecmodels(imodel=ejec[j,"imod"],
+  #                    N=ejec[j,"N"],
+  #                    ivar=ejec[j,"ivar"],
+  #                    Ntest=100,
+  #                    nT=71,
+  #                    nS=51,
+  #                    rho=ejec[j,"rho"])
+  # fin borrar
+  
   #nam=paste0("Ej-",j,"-",ejec[j,"sigma"],".csv")
   #write.csv(resultado,file=nam)
   restotal=rbind(restotal,resultado)

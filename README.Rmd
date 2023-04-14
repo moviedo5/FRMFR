@@ -97,6 +97,7 @@ because it is supposed that its measures are related with the respective polluta
 data("AirQuality")
 ```
 
+The corresponding plots are displayed in Figure 16 of paper. 
 
 ```{r , eval =T,message=F,warning=F,echo=FALSE}
 par(mfrow=c(2,3))
@@ -141,7 +142,7 @@ lines(func.mean(listfinal$C6H6))
 The goal of this study is to predict the content of (log transformation of) Benzene (`C6H6`)  obtained through an independent analyzer considered the Ground Truth. 
 These sensors were collected as 24 hourly averaged concentration values each day jointly with the relative humidity (`rH`) as an external factor. 
 
-+ `/RealDataApplications/AirQuality.R`: Code for  Bike--sharing data example (high computational time)
++ `/RealDataApplications/AirQuality.R`: Code for  AirQuality data example (high computational time)
 
 ```{r , eval = F}
 source("/RealDataApplications/AirQuality.R")
@@ -159,13 +160,13 @@ The logaritmo of number of casual bike rentals (`NCBR`) is considered as our fun
 + Feeling Temperature (`FT`)
 
 
-`data("AirQuality")` included in `fda.usc.devel` packages:
+`data("BikeSharing")` included in `fda.usc.devel` packages:
 
 ```{r , eval = T}
 data("BikeSharing")
 ```
 
-The corresponding plots are displayed in Figure XXX. 
+The corresponding plots are displayed in Figure 5 of paper. 
 
 
 ```{r , eval =T,message=F,warning=F,echo=FALSE}
@@ -225,7 +226,7 @@ names(omel2008_09)
 
 ```
 
-The corresponding plots are displayed in Figure XXX. 
+The corresponding plots are displayed in Figure 6 of paper. 
 
 ```{r , eval =T,message=F,warning=F,echo=FALSE}
 par(mfrow=c(2,2))
