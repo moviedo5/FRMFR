@@ -114,7 +114,156 @@ colMeans(rr2018)
 
 
 #####################################
-# Simulatión varias variables
+# Results for table 5 using the Electricity Demand of the previous day and the previous week as covariates
+#load("omel2008-09.rda")
+data("omel2008")
+npx <- 4
+npy <- 4
+ldat <- omel2008
+nn <- nrow(ldat$energia)
+nlag <- 7
+nl <- (nlag+1):nn
+names(ldat)
+
+ldatm <- ldata(df=ldat$df[nl,],precio=ldat$precio[nl],ener=ldat$energia[nl],ener1=ldat$energia[nl-1],
+               ener7=ldat$energia[nl-nlag],prec1=ldat$precio[nl-1],prec7=ldat$precio[nl-nlag])
+
+ttx <- ldatm$ener$argvals
+tty <- ldatm$precio$argvals
+nbasis.x <- 11;nbasis.y <- 11
+s.n.basis <- 11;t.n.basis <- 11;x.n.basis <- 11
+nk <- nbasis.y;nkk <- c(nbasis.x,nbasis.y)
+
+nrep <- 10
+rr <- matrix(NA,nrep,7)
+rtim <- matrix(NA,nrep,7)
+colnames(rr) <- c("FLMFR","FSAMFR","FKAMFR","PFFR","FAMM","LSIG","DISC")
+colnames(rtim) <- colnames(rr)
+
+compModel <- rep(TRUE,len=7)
+names(compModel) <- colnames(rr)
+compModel["FAMM"] <- FALSE # Time consuming
+compModel <- !compModel  # Only FAMM
+
+compModel[1:7]<-F
+compModel[c(1,2)] <- TRUE
+#compModel <- !compModel 
+compModel
+
+
+set.seed(20030101)
+for (i in 1:nrep){
+  print(paste("Repetition:",i))
+  ii <- sample(nrow(ldatm$df),floor(nrow(ldatm$df)*.75))
+  ldatest <- ldatm[ii,row=T]
+  ldatpred <- ldatm[-ii,row=T]
+  rest <- sum(norm.fdata(ldatpred$precio-func.mean(ldatest$precio))^2)
+  
+  if (any(compModel[c("FLMFR","FSAMFR")])){
+    b.x <- list("ener"=create.pc.basis(ldatest$ener,1:npx),"ener1"=create.pc.basis(ldatest$ener1,1:npx),
+                "ener7"=create.pc.basis(ldatest$ener7,1:npx),"prec1"=create.pc.basis(ldatest$prec1,1:npy),
+                "prec7"=create.pc.basis(ldatest$prec7,1:npy))
+    b.y <- create.pc.basis(ldatest$precio,1:npy)
+  }
+  if (compModel["FLMFR"]){
+    itime <- Sys.time()
+    reslm <- fregre.mlm.fr(precio~ener1+ener7,ldatest,basis.x=b.x,basis.y=b.y)
+    predlm <- predict(reslm,ldatpred)
+    rr[i,1] <- 1-sum(norm.fdata(ldatpred$precio-predlm)^2)/rest
+    itime2 <- Sys.time()
+    print(paste("FLMFR:",round(difftime(itime2,itime,units="mins"),2)))
+    rtim[i,1] <- difftime(itime2,itime,units="mins")
+  }
+  if (compModel["FSAMFR"]){
+    itime <- Sys.time()
+    ressam <- fregre.sam.fr(precio~s(ener1)+s(ener7),ldatest,basis.x=b.x,basis.y=b.y)
+    predsam <- predict(ressam,ldatpred)
+    rr[i,2] <- 1-sum(norm.fdata(ldatpred$precio-predsam)^2)/rest
+    itime2 <- Sys.time()
+    print(paste("FSAMFR:",round(difftime(itime2,itime,units="mins"),2)))
+    rtim[i,2] <- difftime(itime2,itime,units="mins")
+  }
+  if (compModel["FKAMFR"]){
+    itime <- Sys.time()
+    par.np=list(ener=list(Ker=AKer.norm,type.S="S.NW"),ener1=list(Ker=AKer.norm,type.S="S.NW"),ener7=list(Ker=AKer.norm,type.S="S.NW"))
+    par.metric=list(ener=list(metric=metric.lp,lp=2),ener1=list(metric=metric.lp,lp=2),ener7=list(metric=metric.lp,lp=2))
+    reskam <- fregre.kam.fr(precio~ener1+ener7,ldatest,par.np=par.np,par.metric=par.metric)
+    predkam <- predict(reskam,ldatpred)
+    rr[i,3] <- 1-sum(norm.fdata(ldatpred$precio-predkam)^2)/rest
+    itime2 <- Sys.time()
+    print(paste("FKAMFR:",round(difftime(itime2,itime,units="mins"),2)))
+    rtim[i,3] <-difftime(itime2,itime,units="mins")
+  }
+  ydat<-ldatest$precio$data
+  xdat <-ldatest$ener$data
+  xdat1<-ldatest$ener1$data
+  xdat7<-ldatest$ener7$data
+  ydat1<-ldatest$prec1$data
+  ydat7<-ldatest$prec7$data
+  tj<-ldatest$precio$argvals
+  si<-ldatest$ener$argvals
+  
+  if (compModel["PFFR"]){
+    itime <- Sys.time()
+    respffpc=pffr(ydat~ffpc(xdat1,xind=si,npc.max=npx)+ffpc(xdat7,xind=si,npc.max=npx),yind=tj)
+    predffpc=fdata(predict(respffpc,list(xdat1=ldatpred$ener1$data,xdat7=ldatpred$ener7$data)),argvals=tty)
+    rr[i,4] <-1-sum(norm.fdata(ldatpred$precio-predffpc)^2)/rest
+    itime2 <- Sys.time()
+    print(paste("PFR:",round(difftime(itime2,itime,units="mins"),2)))
+    rtim[i,4] <- difftime(itime2,itime,units="mins")
+  }
+  
+  if (compModel["FAMM"]){
+    itime <- Sys.time()
+    respffnl=pffr(ydat~ sff(xdat1,xind=si,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))+
+    					sff(xdat7,xind=si,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk)),
+                   yind=tj,bs.yindex=list(bs="ps",k=nk,m=c(2,1))
+              #bs.int=list(bs="ps",k=21,m=c(2,1))
+    			  )
+    predffnl=fdata(predict(respffnl,list(xdat1=ldatpred$ener1$data,xdat7=ldatpred$ener7$data)),argvals=tty)
+    rr[i,5] <- 1-sum(norm.fdata(ldatpred$precio-predffnl)^2)/rest
+    itime2 <- Sys.time()
+    print(paste("FAMM:",round(difftime(itime2,itime,units="mins"),2)))
+    rtim[i,5] <- difftime(itime2,itime,units="mins")
+  }
+  
+  if (compModel["LSIG"]){
+    itime <- Sys.time()
+    XX=list(Xen1=ldatest$ener1$data,Xen7=ldatest$ener7$data)
+    XXnew=list(Xen1=ldatpred$ener1$data,Xen7=ldatpred$ener7$data)
+    t.x.list=list(Xen1=si,Xen7=si)
+    resSCLin <- cv.sigcom(XX,ydat,t.x.list,tj,s.n.basis=s.n.basis,t.n.basis=t.n.basis)
+    predSCLin <- fdata(pred.sigcom(resSCLin,XXnew),tty)
+    rr[i,6] <- 1-sum(norm.fdata(ldatpred$precio-predSCLin)^2)/rest
+    itime2 <- Sys.time()
+    print(paste("LSC:",round(difftime(itime2,itime,units="mins"),2)))
+    rtim[i,6] <- difftime(itime2,itime,units="mins")
+  }
+  if (compModel["DISC"]){
+    itime <- Sys.time()
+    resSCNL=cv.nonlinear(XX,ydat,t.x.list,tj,s.n.basis=s.n.basis,
+    				 x.n.basis=x.n.basis,t.n.basis=t.n.basis)
+    predSCNL=fdata(pred.nonlinear(resSCNL,XXnew),tty)  
+    rr[i,7] <- 1-sum(norm.fdata(ldatpred$precio-predSCNL)^2)/rest
+    itime2 <- Sys.time()
+    print(paste("DISC:",round(difftime(itime2,itime,units="mins"),2)))
+    rtim[i,7] <- difftime(itime2,itime,units="mins")
+  }
+  print(apply(rr,2,mean,na.rm=TRUE))
+  print(apply(rtim,2,mean,na.rm=TRUE))
+}
+rr_En <- rr
+rtim_En <- rtim
+round(colMeans(rr_En),3)
+round(colMeans(rtim_En),3)
+# repetir codifo con otra formula (fila 1 con energia)
+#Table 5: Average of R-square for prediction models with response Prd. Period: 2008-09.
+# Rsquare          FLMFR FSAMFR FKAMFR   PFR  FAMM   LSC  DISC
+# En(d−1), En(d−7) 0.336  0.456  0.631 0.324 0.564 0.600 0.655
+
+
+#####################################
+# Results for table 5 using the price of the previous day and the previous week as covariates
 #load("omel2008-09.rda")
 data("omel2008")
 npx <- 4
@@ -274,11 +423,13 @@ for (i in 1:nrep){
   print(apply(rtim,2,mean,na.rm=TRUE))
 }
 
-round(colMeans(rr),3)
-round(colMeans(rtim),3)
-# repetir codifo con otra formula (fila 1 con energia)
+rr_Pr <- rr
+rtim_Pr <- rtim
+round(colMeans(rr_Pr),3)
+round(colMeans(rtim_Pr),3)
+
 #Table 5: Average of R-square for prediction models with response Prd. Period: 2008-09.
 # Rsquare          FLMFR FSAMFR FKAMFR   PFR  FAMM   LSC  DISC
-# En(d−1), En(d−7) 0.336  0.456  0.631 0.324 0.564 0.600 0.655
-# Pr(d−1), Pr(d−7) 0.900  0.881  0.886 0.886 0.859 0.898 0.881
-                   0.890  0.881     NA 0.886     NA0.898 0.881 
+# Tabla 5 results  0.900  0.881  0.886 0.886 0.859 0.898 0.881
+# MOF PC results   0.890  0.881  0.885 0.886 0.859 0.898 0.881       
+                   
