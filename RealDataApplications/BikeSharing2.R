@@ -71,10 +71,11 @@ names(compModel) <- colnames(mtrain1)
 compModel["FAMM"] <- FALSE # Time consuming
 compModel <- !compModel  # Only FAMM
 
-compModel
+compModel <- !compModel  # Only FAMM
+
+compModel[1:7]<-F
+compModel["FAMM"]<-T
 kk=c(7,9,9) # Model has more coefficients than data
-
-
 
 set.seed(20030101)
 for (i in 1:nrep){ # i<-1

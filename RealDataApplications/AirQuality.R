@@ -75,7 +75,7 @@ s.n.basis <- 11
 t.n.basis <- 11
 x.n.basis <- 11
 nk <- 11
-nkk <- c(11,11,11)
+nkk <- c(11,11,11) # Model has more coefficients than data
 
 # fregre.kam.fr parameter
 tr <- FALSE
@@ -281,32 +281,32 @@ for (i in 1:nrep){
     mpred1[i,5] <- 1 - mean(norm.fdata(ypred - predsff)^2)/MSEpr
     
     # Model 2 refund  
-    mod.pffnl <- pffr(YD ~ sff(X1,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-                          + sff(X2,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-                          + sff(X3,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-                       , yind=tj,bs.yindex=list(bs="ps",k=nk,m=c(2,1))
-                       )
-    fitt <- fdata(matrix(mod.pffnl$fitted.values,
-                         ncol=length(tj),byrow=TRUE),argvals=tj,rj)
-    predsff <- fdata(predict(mod.pffnl,list(X1=lpred$NMHC$data,X2=lpred$O3$data,
-                                            X3=lpred$CO$data)),argvals=tj,rj)
-    mtrain2[i,5] <- 1 - mean(norm.fdata(ytrain - fitt)^2)/MSEtr
-    mpred2[i,5] <- 1 - mean(norm.fdata(ypred - predsff)^2)/MSEpr
-    
-    # Model 3 refund  
-    mod.pffnl <- pffr(YD ~ sff(X1,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-                        	+ sff(X2,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-                          + sff(X3,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-                          + sff(X4,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-                          + sff(X5,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-                       ,yind=tj,bs.yindex=list(bs="ps",k=nk,m=c(2,1))
-                       )
-    fitt <- fdata(matrix(mod.pffnl$fitted.values,
-                         ncol=length(tj),byrow=TRUE),argvals=tj,rj)
-    predsff <- fdata(predict(mod.pffnl,list(X1=lpred$NMHC$data,X2=lpred$O3$data,
-        X3=lpred$CO$data,X4=lpred$NO2$data,X5=lpred$NOx$data)),argvals=tj,rj)
-    mtrain3[i,5] <- 1 - mean(norm.fdata(ytrain - fitt)^2)/MSEtr
-    mpred3[i,5] <- 1 - mean(norm.fdata(ypred - predsff)^2)/MSEpr
+    # mod.pffnl <- pffr(YD ~ sff(X1,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+    #                       + sff(X2,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+    #                       + sff(X3,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+    #                    , yind=tj,bs.yindex=list(bs="ps",k=nk,m=c(2,1))
+    #                    )
+    # fitt <- fdata(matrix(mod.pffnl$fitted.values,
+    #                      ncol=length(tj),byrow=TRUE),argvals=tj,rj)
+    # predsff <- fdata(predict(mod.pffnl,list(X1=lpred$NMHC$data,X2=lpred$O3$data,
+    #                                         X3=lpred$CO$data)),argvals=tj,rj)
+    # mtrain2[i,5] <- 1 - mean(norm.fdata(ytrain - fitt)^2)/MSEtr
+    # mpred2[i,5] <- 1 - mean(norm.fdata(ypred - predsff)^2)/MSEpr
+    # 
+    # # Model 3 refund  
+    # mod.pffnl <- pffr(YD ~ sff(X1,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+    #                     	+ sff(X2,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+    #                       + sff(X3,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+    #                       + sff(X4,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+    #                       + sff(X5,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+    #                    ,yind=tj,bs.yindex=list(bs="ps",k=nk,m=c(2,1))
+    #                    )
+    # fitt <- fdata(matrix(mod.pffnl$fitted.values,
+    #                      ncol=length(tj),byrow=TRUE),argvals=tj,rj)
+    # predsff <- fdata(predict(mod.pffnl,list(X1=lpred$NMHC$data,X2=lpred$O3$data,
+    #     X3=lpred$CO$data,X4=lpred$NO2$data,X5=lpred$NOx$data)),argvals=tj,rj)
+    # mtrain3[i,5] <- 1 - mean(norm.fdata(ytrain - fitt)^2)/MSEtr
+    # mpred3[i,5] <- 1 - mean(norm.fdata(ypred - predsff)^2)/MSEpr
   }  
   
   if (compModel["LSIG"]){
