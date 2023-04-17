@@ -259,8 +259,8 @@ round(colMeans(rtim_En),3)
 # repetir codigo con otra formula (fila 1 con energia)
 #Table 5: Average of R-square for prediction models with response Prd. Period: 2008-09.
 # Rsquare  FLMFR FSAMFR FKAMFR   PFR  FAMM   LSC  DISC
-#  Tabla 5 0.336  0.456  0.63 1 0.324 0.564  0.600  0.655
-# MOF PC   0.336  0.456     NA  0.324     NA  0.601  0.655
+#  Tabla 5 0.336  0.456  0.631 0.324 0.564  0.600  0.655
+# MOF PC   0.336  0.456  0.631  0.324  0.564  0.601  0.655 
 #####################################
 # Results for table 5 using the price of the previous day and the previous week as covariates
 #load("omel2008-09.rda")
