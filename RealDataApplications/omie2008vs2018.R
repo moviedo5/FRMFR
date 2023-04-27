@@ -2,7 +2,7 @@
 library(fda.usc.devel)
 library(FRegSigCom)
 library(refund)
-# Pr y En--->fda.usc.devel no poner añudas
+
 # @noRd o 
 #' @keywords internal ponerlo en las funciones auxiliares
 #' Price por Pr
@@ -24,7 +24,7 @@ s.n.basis=11;t.n.basis=11;x.n.basis=11
 nk=nbasis.y;nkk=c(nbasis.y,nbasis.x,nbasis.y)
 spars=list(bs = "ps",m = c(2, 2, 2), k=nkk)
 
-nrep=20
+nrep=100
 rr <- matrix(NA,ncol=7,nrow=nrep)
 colnames(rr) <- c("FLMFR","FSAMFR","FKAMFR","PFFR","FAMM","LSIG","DISC")
 
@@ -104,8 +104,8 @@ for (i in 1:nrep){
     predSCNL=fdata(pred.nonlinear(resSCNL,XXnew),tty)  
     rr[i,7] <- 1-sum(norm.fdata(ldatpred$precio-predSCNL)^2)/rest
   }
-  print(i)
-  print(round(rr[i,],2))
+#  print(i)
+  print(paste0(i,"-",round(rr[i,],3),collapse="/"))
 }
 rr2018 <- rr
 colMeans(rr2018)
@@ -124,7 +124,7 @@ s.n.basis=11;t.n.basis=11;x.n.basis=11
 nk=nbasis.y;nkk=c(nbasis.y,nbasis.x,nbasis.y)
 spars=list(bs = "ps",m = c(2, 2, 2), k=nkk)
 
-nrep=20
+nrep=100
 rr <- matrix(NA,ncol=7,nrow=nrep)
 colnames(rr) <- c("FLMFR","FSAMFR","FKAMFR","PFFR","FAMM","LSIG","DISC")
 
@@ -204,8 +204,8 @@ for (i in 1:nrep){
     predSCNL=fdata(pred.nonlinear(resSCNL,XXnew),tty)  
     rr[i,7] <- 1-sum(norm.fdata(ldatpred$precio-predSCNL)^2)/rest
   }
-  print(i)
-  print(round(rr[i,],2))
+#  print(i)
+  print(paste0(i,"-",round(rr[i,],3),collapse="/"))
 }
 rr2008 <- rr
 colMeans(rr2008)
@@ -276,7 +276,7 @@ nk=nbasis.y;nkk=c(nbasis.y,nbasis.x,nbasis.y)
 spars=list(bs = "ps",m = c(2, 2, 2), k=nkk)
 
 
-nrep <- 20
+nrep <- 100
 rr <- matrix(NA,nrep,7)
 rtim <- matrix(NA,nrep,7)
 colnames(rr) <- c("FLMFR","FSAMFR","FKAMFR","PFFR","FAMM","LSIG","DISC")
@@ -424,7 +424,7 @@ s.n.basis <- 11;t.n.basis <- 11;x.n.basis <- 11
 nk=nbasis.y;nkk=c(nbasis.y,nbasis.x,nbasis.y)
 spars=list(bs = "ps",m = c(2, 2, 2), k=nkk)
 
-nrep <- 20
+nrep <- 100
 rr <- matrix(NA,nrep,7)
 rtim <- matrix(NA,nrep,7)
 colnames(rr) <- c("FLMFR","FSAMFR","FKAMFR","PFFR","FAMM","LSIG","DISC")
