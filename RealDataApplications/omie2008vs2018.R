@@ -3,14 +3,6 @@ library(fda.usc.devel)
 library(FRegSigCom)
 library(refund)
 
-# @noRd o 
-#' @keywords internal ponerlo en las funciones auxiliares
-#' Price por Pr
-#' Energia por En
-#' logNBCR --> log(NBCR+1) # incluir 1 
-#' Exportar Minverse-->hacer ayuda
-#' fregre.gsam.cl/con, classif.bootstrap
-#' 
 #data("omel2018")
 #ldat <- omel2018
 
@@ -247,7 +239,7 @@ par(mfrow=c(1,2))
 
 #m=rbind(c(1,2,5),c(3,4,5))
 #layout(m)
-ran=range(rr2008,rr2018)
+ran=range(rr2008,rr2018,na.rm=TRUE)
 boxplot(rr2008,cex.axis=0.75,ylim=ran,main=expression( R[p]^2: textstyle(2008-2009.)))
 boxplot(rr2018,cex.axis=0.75,ylim=ran,main=expression( R[p]^2: textstyle(2018-2019.)))
 
