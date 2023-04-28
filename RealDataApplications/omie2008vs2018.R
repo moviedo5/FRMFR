@@ -22,7 +22,7 @@ colnames(rr) <- c("FLMFR","FSAMFR","FKAMFR","PFFR","FAMM","LSIG","DISC")
 
 compModel <- rep(TRUE,len=7)
 names(compModel) <- colnames(rr)
-compModel["FAMM"] <- FALSE # All except FAMM Time consuming
+#compModel["FAMM"] <- FALSE # All except FAMM Time consuming
 #compModel <- !compModel  # Only FAMM
 #compModel[1:7]<-T
 #compModel[c(1,2,4,6,7)] <- TRUE
@@ -122,7 +122,7 @@ colnames(rr) <- c("FLMFR","FSAMFR","FKAMFR","PFFR","FAMM","LSIG","DISC")
 
 compModel <- rep(TRUE,len=7)
 names(compModel) <- colnames(rr)
-compModel["FAMM"] <- FALSE # All except FAMM Time consuming
+#compModel["FAMM"] <- FALSE # All except FAMM Time consuming
 #compModel <- !compModel  # Only FAMM
 #compModel[1:7]<-T
 #compModel[c(1,2,4,6,7)] <- TRUE
