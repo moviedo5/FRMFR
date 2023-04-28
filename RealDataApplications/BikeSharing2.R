@@ -1,3 +1,5 @@
+
+# rm(list=ls())
 library(fda.usc.devel)
 library(refund)
 library(FRegSigCom)
@@ -18,7 +20,6 @@ x3 <- BikeSharing$windspeed
 x4 <- BikeSharing$feeltemp
 y <- BikeSharing$logNBCR
 
-
 plot(x1,col=gray(.5))
 lines(x1[lesp],lwd=2)
 plot(x2,col=gray(.5))
@@ -36,16 +37,17 @@ lines(y[lesp],lwd=2)
 # September 17th, 2011, January 21st, 2012, and January 9th, 2012, respectively.
 
 
-##### Refund parameters 
+# Refund parameters (FAMM model)
 kk=c(9,9,9) # Model has more coefficients than data
-kk=c(7,9,9) # Model has more coefficients than data
+kk=c(7,9,9) # Maximum parameters accepted for 
+
 mm <- c(2,2,2)
 #kk <- 7
 k0 <- 7
 m0 <- c(2,1)
 kpc <-  11
 
-#SigCom parameters 
+# SigCom parameters 
 snb <- 15
 tnb <- 15
 
@@ -57,28 +59,22 @@ npc3 <- 6
 npc4 <- 2
 tj <- seq(0.5,23.5)
 
-nrep=20
-# rr=matrix(NA,nrep,7)
-# colnames(rr)=c("FLMFR","FSAMFR","FKAMFR","PFR","FAMM","LSC","DISC")
-
+nrep <- 20
 
 rr1 <- matrix(NA,ncol=7,nrow=nrep)
-colnames(rr1) <- c("FLMFR","FSAMFR","FKAMFR","PFFR","FAMM","LSIG","DISC")
+colnames(rr1) <- c("FLMFR","FSAMFR","FKAMFR","PFR","FAMM","LSIG","DISC")
 rr3 <- rr2 <- rr1
 
 compModel <- rep(TRUE,len=7)
-names(compModel) <- colnames(mtrain1)
-compModel["FAMM"] <- FALSE # Time consuming
-compModel <- !compModel  # Only FAMM
-
-compModel <- !compModel  # Only FAMM
-
-compModel[1:7]<-F
-compModel["FAMM"]<-T
-kk=c(7,9,9) # Model has more coefficients than data
+names(compModel) <- colnames(rr1)
+# FAMM requires high time-consuming
+# Uncomment next line for avoiding estimate FAMM model
+# compModel["FAMM"] <- FALSE
+# compModel <- !compModel   # Only FAMM
+compModel
 
 set.seed(20030101)
-for (i in 1:nrep){ # i<-1
+for (i in 1:nrep){
   index=sample(1:102,82)
   
   yt=y[index]
@@ -104,7 +100,6 @@ for (i in 1:nrep){ # i<-1
              X3=create.pc.basis(X3,1:npc3),X4=create.pc.basis(X4,1:npc4))
     b.y=create.pc.basis(yt,1:npcy)
     }
-  
   
   if (compModel["FLMFR"]){
     form <- yt~X4
@@ -153,16 +148,15 @@ for (i in 1:nrep){ # i<-1
     form <- yt~X4+X2
     reskam=fregre.kam.fr(form,data=ldatos,par.metric=pmetric)
     prkam=predict(reskam,ldatnew)
-    rr1[i,3]=1-sum(norm.fdata(ldatnew$yt-prkam)^2)/rest
-    
+    rr2[i,3]=1-sum(norm.fdata(ldatnew$yt-prkam)^2)/rest
     form <- yt~X4+X2+X3
     reskam=fregre.kam.fr(form,data=ldatos,par.metric=pmetric)
     prkam=predict(reskam,ldatnew)
-    rr1[i,3]=1-sum(norm.fdata(ldatnew$yt-prkam)^2)/rest
+    rr3[i,3]=1-sum(norm.fdata(ldatnew$yt-prkam)^2)/rest
   }
   
   Y1D=yt$data;X1D=X1$data;X2D=X2$data;X3D=X3$data;X4D=X4$data
-  if (compModel["PFFR"]){
+  if (compModel["PFR"]){
   respff1pc=pffr(Y1D~ffpc(X4D,xind=tj,npc.max=npc4,splinepars=list(k=kpc))
                          ,yind=tj)
   respff1pc.fit=fdata(matrix(respff1pc$fitted.values,ncol=length(tj),byrow=TRUE),argvals=tj)
@@ -182,31 +176,29 @@ for (i in 1:nrep){ # i<-1
                  ,yind=tj)
   respff1pc.fit=fdata(matrix(respff1pc$fitted.values,ncol=length(tj),byrow=TRUE),argvals=tj)
   prff1.pc=fdata(predict(respff1pc,list(X4D=X4new$data,X2D=X2new$data,X3D=X3new$data)),argvals=tj)
-  rr1[i,4]=1-sum(norm.fdata(ldatnew$yt-prff1.pc)^2)/rest
+  rr1[3,4]=1-sum(norm.fdata(ldatnew$yt-prff1.pc)^2)/rest
   }
   
-  if (compModel["FAMM"]){
+   if (compModel["FAMM"]){
     respff1=pffr(Y1D~sff(X4D,xind=tj,splinepars=list(bs="ps",m=mm,k=kk))
-                   ,yind=tj,bs.yindex=list(bs="ps",m=m0,k=k0))
-    
+                    ,yind=tj,bs.yindex=list(bs="ps",m=m0,k=k0))
+     
     respff1.fit=fdata(matrix(respff1$fitted.values,ncol=length(tj),byrow=TRUE),argvals=tj)
     prff1=fdata(predict(respff1,list(X4D=X4new$data)),argvals=tj)
     rr1[i,5]=1-sum(norm.fdata(ldatnew$yt-prff1)^2)/rest
-    
+
     respff1=pffr(Y1D~sff(X4D,xind=tj,splinepars=list(bs="ps",m=mm,k=kk))
-                 #  ojo estaba así       +sff(X3D,xind=tj,splinepars=list(bs="ps",m=mm,k=kk))
-                 +sff(X2D,xind=tj,splinepars=list(bs="ps",m=mm,k=kk))
-                 ,yind=tj,bs.yindex=list(bs="ps",m=m0,k=k0))
-    
+                  +sff(X2D,xind=tj,splinepars=list(bs="ps",m=mm,k=kk))
+                  ,yind=tj,bs.yindex=list(bs="ps",m=m0,k=k0))
+     
     respff1.fit=fdata(matrix(respff1$fitted.values,ncol=length(tj),byrow=TRUE),argvals=tj)
     prff1=fdata(predict(respff1,list(X4D=X4new$data,X2D=X2new$data)),argvals=tj)
     rr2[i,5]=1-sum(norm.fdata(ldatnew$yt-prff1)^2)/rest
-    
+
     respff1=pffr(Y1D~sff(X4D,xind=tj,splinepars=list(bs="ps",m=mm,k=kk))
                    +sff(X2D,xind=tj,splinepars=list(bs="ps",m=mm,k=kk))
                           +sff(X3D,xind=tj,splinepars=list(bs="ps",m=mm,k=kk))
                  ,yind=tj,bs.yindex=list(bs="ps",m=m0,k=k0))
-    
     respff1.fit=fdata(matrix(respff1$fitted.values,ncol=length(tj),byrow=TRUE),argvals=tj)
     prff1=fdata(predict(respff1,list(X4D=X4new$data,X2D=X2new$data,X3D=X3new$data)),argvals=tj)
     rr3[i,5]=1-sum(norm.fdata(ldatnew$yt-prff1)^2)/rest
@@ -277,7 +269,6 @@ for (i in 1:nrep){ # i<-1
   print(round(rr1[i,],2))
   print(round(rr2[i,],2))
   print(round(rr3[i,],2))
-  
 }
 par(mfrow=c(1,1))
 boxplot(rr1)
@@ -285,15 +276,5 @@ round(apply(rr1,2,median,na.rm=TRUE),3)
 round(apply(rr2,2,median,na.rm=TRUE),3)
 round(apply(rr3,2,median,na.rm=TRUE),3)
 
-# # PC-MOF
-# FLMFR FSAMFR FKAMFR    PFR   FAMM    LSC   DISC 
-# 0.551  0.622  0.607  0.544  0.581  0.544  0.592
-                                        #   OJO el FAMM da 0.581!!!
-# #PAPPER
-# covariates FLMFR FSAMFR FKAMFR PFR FAMM LSC DISC
-# FT 0.551 0.622 0.607 0.544 0.373 0.544 0.592
-# FT, H 0.502 0.608 0.636 0.512 0.373 0.486 0.636
-# FT, H, WS 0.522 0.560 0.644 0.507 0.529 0.500 0.652
-# Table 3: Median of R^2_p for the methods (including the covariates in order of
-# importance) for predicting log(NCBR+1). The highest values per row are
-# printed in bold.
+# save.image(file="output_BikeSharing_nrep20.RData")
+save(rr1,rr2,rr3,file="rr_BikeSharing_nrep20.rda")
