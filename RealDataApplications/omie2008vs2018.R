@@ -278,8 +278,6 @@ compModel <- rep(TRUE,len=7)
 names(compModel) <- colnames(rr)
 compModel["FAMM"] <- FALSE # All except FAMM Time consuming
 #compModel <- !compModel  # Only FAMM
-#compModel[1:7]<-T
-#compModel[c(1,2,4,6,7)] <- TRUE
 compModel
 
 set.seed(20030101)
@@ -388,10 +386,6 @@ round(colMeans(rr_En),3)
 round(colMeans(rtim_En),3)
 
 
-#Table 5: Average of R-square for prediction models with response Prd. Period: 2008-09.
-# Rsquare  FLMFR FSAMFR FKAMFR   PFR  FAMM   LSC  DISC
-#  Tabla 5 0.336  0.456  0.631 0.324 0.564  0.600  0.655
-# MOF PC   0.336  0.456  0.631  0.324  0.564  0.601  0.655 
 #####################################
 # Results for table 5 using the price of the previous day and the previous week as covariates
 #load("omel2008-09.rda")
@@ -539,9 +533,4 @@ rtim_Pr <- rtim
 round(colMeans(rr_Pr),3)
 round(colMeans(rtim_Pr),3)
 
-#Table 5: Average of R-square for prediction models with response Prd. Period: 2008-09.
-# Rsquare          FLMFR FSAMFR FKAMFR   PFR  FAMM   LSC  DISC
-# Tabla 5 results  0.900  0.881  0.886 0.886 0.859 0.898 0.881
-# MOF PC results   0.890  0.881  0.885 0.886 0.859 0.898 0.881       
-
-               
+       
