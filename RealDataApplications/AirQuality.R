@@ -46,7 +46,7 @@ irow <- c(3,2,4,6,8)
 icol <- c(1,3,2,4,6)
 round(mdcor[irow,icol],3)
 ################################################################################
-# Ejecutar previamente un modelo para ver que sale M2=3
+# Steps to select M2 and M3
 #mod.lm.fr <- fregre.mlm.fr(C6H6~NMHC,data=ltrain,basis.y=b.y,basis.x=b.x)
 #mod.sam.f <- fregre.sam.fr(C6H6~s(NMHC),data=ltrain,basis.y=b.y,basis.x=b.x)
 #mod.kam.fr <- fregre.kam.fr(C6H6~NMHC,data=ltrain,par.metric=pmetric,par.np=par.np,control=list(trace=tr))
@@ -75,7 +75,7 @@ s.n.basis <- 11
 t.n.basis <- 11
 x.n.basis <- 11
 nk <- 11
-nkk <- c(11,11,11) # Model has more coefficients than data
+nkk <- c(11,11,11) # Model has more coefficients than data FAMM
 
 # fregre.kam.fr parameter
 tr <- FALSE
@@ -281,32 +281,32 @@ for (i in 1:nrep){
     mpred1[i,5] <- 1 - mean(norm.fdata(ypred - predsff)^2)/MSEpr
     
     # Model 2 refund  
-    # mod.pffnl <- pffr(YD ~ sff(X1,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-    #                       + sff(X2,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-    #                       + sff(X3,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-    #                    , yind=tj,bs.yindex=list(bs="ps",k=nk,m=c(2,1))
-    #                    )
-    # fitt <- fdata(matrix(mod.pffnl$fitted.values,
-    #                      ncol=length(tj),byrow=TRUE),argvals=tj,rj)
-    # predsff <- fdata(predict(mod.pffnl,list(X1=lpred$NMHC$data,X2=lpred$O3$data,
-    #                                         X3=lpred$CO$data)),argvals=tj,rj)
-    # mtrain2[i,5] <- 1 - mean(norm.fdata(ytrain - fitt)^2)/MSEtr
-    # mpred2[i,5] <- 1 - mean(norm.fdata(ypred - predsff)^2)/MSEpr
-    # 
+     mod.pffnl <- pffr(YD ~ sff(X1,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+                           + sff(X2,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+                           + sff(X3,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+                        , yind=tj,bs.yindex=list(bs="ps",k=nk,m=c(2,1))
+                        )
+     fitt <- fdata(matrix(mod.pffnl$fitted.values,
+                          ncol=length(tj),byrow=TRUE),argvals=tj,rj)
+     predsff <- fdata(predict(mod.pffnl,list(X1=lpred$NMHC$data,X2=lpred$O3$data,
+                                             X3=lpred$CO$data)),argvals=tj,rj)
+     mtrain2[i,5] <- 1 - mean(norm.fdata(ytrain - fitt)^2)/MSEtr
+     mpred2[i,5] <- 1 - mean(norm.fdata(ypred - predsff)^2)/MSEpr
+     
     # # Model 3 refund  
-    # mod.pffnl <- pffr(YD ~ sff(X1,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-    #                     	+ sff(X2,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-    #                       + sff(X3,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-    #                       + sff(X4,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-    #                       + sff(X5,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
-    #                    ,yind=tj,bs.yindex=list(bs="ps",k=nk,m=c(2,1))
-    #                    )
-    # fitt <- fdata(matrix(mod.pffnl$fitted.values,
+     mod.pffnl <- pffr(YD ~ sff(X1,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+                         	+ sff(X2,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+                           + sff(X3,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+                           + sff(X4,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+                           + sff(X5,xind=tj,splinepars = list(bs = "ps",m = c(2, 2, 2), k=nkk))
+                        ,yind=tj,bs.yindex=list(bs="ps",k=nk,m=c(2,1))
+                        )
+     fitt <- fdata(matrix(mod.pffnl$fitted.values,
     #                      ncol=length(tj),byrow=TRUE),argvals=tj,rj)
-    # predsff <- fdata(predict(mod.pffnl,list(X1=lpred$NMHC$data,X2=lpred$O3$data,
-    #     X3=lpred$CO$data,X4=lpred$NO2$data,X5=lpred$NOx$data)),argvals=tj,rj)
-    # mtrain3[i,5] <- 1 - mean(norm.fdata(ytrain - fitt)^2)/MSEtr
-    # mpred3[i,5] <- 1 - mean(norm.fdata(ypred - predsff)^2)/MSEpr
+     predsff <- fdata(predict(mod.pffnl,list(X1=lpred$NMHC$data,X2=lpred$O3$data,
+         X3=lpred$CO$data,X4=lpred$NO2$data,X5=lpred$NOx$data)),argvals=tj,rj)
+     mtrain3[i,5] <- 1 - mean(norm.fdata(ytrain - fitt)^2)/MSEtr
+     mpred3[i,5] <- 1 - mean(norm.fdata(ypred - predsff)^2)/MSEpr
   }  
   
   if (compModel["LSIG"]){
@@ -404,7 +404,7 @@ round(colMeans(mpred2),3)
 round(colMeans(mpred3),3)
 
 # Table 13 (paper)
-# Model FLMFR FSAMFR FKAMFR PFR FAMM LSC DISC #PAPPER
+# Model FLMFR FSAMFR FKAMFR PFR FAMM LSC DISC #PAPER
 # M1 0.889 0.900 0.848 0.855 0.815 0.923 0.920
 # M2 0.892 0.901 0.858 0.864 0.817 0.926 0.912
 # M3 0.891 0.900 0.859 0.862 0.815 0.924 0.899
