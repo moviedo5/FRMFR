@@ -88,11 +88,7 @@ mtrain3 <- mtrain2 <- mpred3 <- mpred2 <- mpred1 <- mtrain1
 compModel <- rep(TRUE,len=7)
 names(compModel) <- colnames(mtrain1)
 compModel["FAMM"] <- FALSE # Time consuming
-compModel <- !compModel  # Only FAMM
-
-compModel[1:7]<- FALSE
-compModel[4]<- TRUE
-
+#compModel <- !compModel  # Only FAMM
 compModel
 
 n <- nrow(listfinal$df)
@@ -302,7 +298,7 @@ for (i in 1:nrep){
                         ,yind=tj,bs.yindex=list(bs="ps",k=nk,m=c(2,1))
                         )
      fitt <- fdata(matrix(mod.pffnl$fitted.values,
-    #                      ncol=length(tj),byrow=TRUE),argvals=tj,rj)
+                          ncol=length(tj),byrow=TRUE),argvals=tj,rj)
      predsff <- fdata(predict(mod.pffnl,list(X1=lpred$NMHC$data,X2=lpred$O3$data,
          X3=lpred$CO$data,X4=lpred$NO2$data,X5=lpred$NOx$data)),argvals=tj,rj)
      mtrain3[i,5] <- 1 - mean(norm.fdata(ytrain - fitt)^2)/MSEtr
