@@ -43,10 +43,10 @@ To install refund package from CRAN or Github.
 
 ```{r , eval = FALSE}
 # install.packages("refund")
-# install_version("refund", version = "0.1-30", 
-#                 repos = "http://cran.us.r-project.org")
+devtools::install_version("refund", version = "0.1-30", 
+                          repos = "http://cran.us.r-project.org")
 # latest patched version directly from Github
-devtools::install_github("refunders/refund") 
+# devtools::install_github("refunders/refund") 
 ```
 
 ##  3. `FRegSigCom` package

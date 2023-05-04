@@ -43,10 +43,10 @@ To install refund package from CRAN or Github.
 
 ``` r
 # install.packages("refund")
-# install_version("refund", version = "0.1-30", 
-#                 repos = "http://cran.us.r-project.org")
+devtools::install_version("refund", version = "0.1-30", 
+                          repos = "http://cran.us.r-project.org")
 # latest patched version directly from Github
-devtools::install_github("refunders/refund") 
+# devtools::install_github("refunders/refund") 
 ```
 
 ## 3. `FRegSigCom` package
@@ -103,6 +103,8 @@ labeled with:
 data("AirQuality")
 ```
 
+The corresponding plots are displayed in Figure 16 of paper.
+
 ![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 The goal of this study is to predict the content of (log transformation
@@ -111,8 +113,8 @@ the Ground Truth. These sensors were collected as 24 hourly averaged
 concentration values each day jointly with the relative humidity (`rH`)
 as an external factor.
 
-- `/RealDataApplications/AirQuality.R`: Code for Bike–sharing data
-  example (high computational time)
+- `/RealDataApplications/AirQuality.R`: Code for AirQuality data example
+  (high computational time)
 
 ``` r
 source("/RealDataApplications/AirQuality.R")
@@ -135,13 +137,13 @@ predictors:
 - Wind Speed (`WS`) and
 - Feeling Temperature (`FT`)
 
-`data("AirQuality")` included in `fda.usc.devel` packages:
+`data("BikeSharing")` included in `fda.usc.devel` packages:
 
 ``` r
 data("BikeSharing")
 ```
 
-The corresponding plots are displayed in Figure XXX.
+The corresponding plots are displayed in Figure 5 of paper.
 
     ## [1] "df"        "logNBCR"   "temp"      "feeltemp"  "humidity"  "windspeed"
 
@@ -180,7 +182,7 @@ names(omel2008_09)
 
     ## [1] "df" "Pr" "En"
 
-The corresponding plots are displayed in Figure XXX.
+The corresponding plots are displayed in Figure 6 of paper.
 
 ![](README_files/figure-gfm/unnamed-chunk-13-1.png)<!-- -->
 
