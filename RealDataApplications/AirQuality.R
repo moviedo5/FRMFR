@@ -399,10 +399,4 @@ round(colMeans(mpred1),3)
 round(colMeans(mpred2),3)
 round(colMeans(mpred3),3)
 
-# Table 13 (paper)
-# Model FLMFR FSAMFR FKAMFR PFR FAMM LSC DISC #PAPER
-# M1 0.889 0.900 0.848 0.855 0.815 0.923 0.920
-# M2 0.892 0.901 0.858 0.864 0.817 0.926 0.912
-# M3 0.891 0.900 0.859 0.862 0.815 0.924 0.899
-
 
