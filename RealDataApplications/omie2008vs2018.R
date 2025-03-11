@@ -413,7 +413,7 @@ spars=list(bs = "ps",m = c(2, 2, 2), k=nkk)
 nrep <- 100
 rr <- matrix(NA,nrep,7)
 rtim <- matrix(NA,nrep,7)
-colnames(rr) <- c("FLMFR","FSAMFR","FKAMFR","PFFR","FAMM","LSIG","DISC")
+colnames(rr) <- c("FLMFR","FSAMFR","FKAMFR","PFR","FAMM","LSC","DISC")
 colnames(rtim) <- paste0("t",colnames(rr))
 
 compModel <- rep(TRUE,len=7)
