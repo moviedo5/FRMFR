@@ -5,12 +5,10 @@ bibliography: bibliografia.bib
 
 # Supplementary material for Functional Regression Models with Functional Response (FRMFR)
 
-<<<<<<< HEAD
 Supplementary codes and data used in the paper.
 
 Please cite:
-=======
->>>>>>> 4dcc6930e1e0b80b9bed21cba4c6d15809c95b49
+
 
 > **Febrero-Bande, M., Oviedo-de la Fuente, M., Darbalaei, M., & Amini, M. (2024).**  
 > *Functional regression models with functional response: a new approach and a comparative study.*  
@@ -29,13 +27,9 @@ Please cite:
 }
 ```
 
-
-<<<<<<< HEAD
 ## Installation
 
 To run the implementations used in the paper (numerical studies and real-data examples) install:
-=======
->>>>>>> 4dcc6930e1e0b80b9bed21cba4c6d15809c95b49
 
 ### 1) `fda.frm` (FRM methods) + dependency `fda.usc`
 
@@ -56,7 +50,6 @@ install.packages("fda.usc")
 > **Note.** The package **fda.usc.devel** used to bundle `fda.usc` plus modifications and new functions.  
 > Now, for function-on-function models with functional response, use **fda.frm** (which builds on `fda.usc`).
 
-<<<<<<< HEAD
 <!--
 ```{r , eval = FALSE}
 packageurl <- "https://github.com/moviedo5/FRMFR/blob/main/pkg/fda.usc.devel_2.1.1.tar.gz"
@@ -69,11 +62,6 @@ install.packages(url, repos = NULL)
 To compares our proposed methods (namely, FLMFR, FSAMFR, and FKAMFR), with the four mentioned competitor methods (namely, PFR, FAMM, LSC, and DISC).
 -->
 
-=======
-To compares our proposed methods (namely, FLMFR, FSAMFR, and FKAMFR, which are available in the `fda.usc` package (devel version) through the commands `fregre.mlm.fr`, `fregre.sam.fr` and `fregre.kam.fr`) with the four mentioned competitor methods (namely, PFR, FAMM, LSC, and DISC).
-
-
->>>>>>> 4dcc6930e1e0b80b9bed21cba4c6d15809c95b49
 ## 2. `refund` package
 
 PFR and FAMM methods are available in the `refund` package through the command `pffr`, where the argument formula allows us to include linear `ffpc`, `ff` or nonlinear term `sff`. 
@@ -82,10 +70,10 @@ To install refund package from CRAN or Github.
 
 ```{r , eval = FALSE}
 # install.packages("refund")
-devtools::install_version("refund", version = "0.1-30", 
-                          repos = "http://cran.us.r-project.org")
+# install_version("refund", version = "0.1-30", 
+#                 repos = "http://cran.us.r-project.org")
 # latest patched version directly from Github
-# devtools::install_github("refunders/refund") 
+devtools::install_github("refunders/refund") 
 ```
 
 ##  3. `FRegSigCom` package
@@ -101,13 +89,12 @@ devtools::install_github("moviedo5/FRMFR/pkg/FRegSigCom")
 # install.packages(url, repos=NULL, type="source")
 ```
 
-<<<<<<< HEAD
 
 
 
-=======
->>>>>>> 4dcc6930e1e0b80b9bed21cba4c6d15809c95b49
 # Simulation (Numerical Studies)
+
+<!--Consult a detailed documentation of the code and examples of use in-->
 
 + `./inst/script/Simulation.R`: Code for main simulation. Scenarios 1--4.
 
@@ -130,8 +117,8 @@ library(fda.usc)
 See `RealDataApplications/` for the data examples and runnable R scripts.
 
 ## 1. Air Quality Data
-<<<<<<< HEAD
 The Air Quality dataset (AQI) from the UCI repository [@Qi2019]. AQI is a popular dataset consisting of five metal oxide chemical sensors embedded into an air quality multisensor device. The column names in the dataset begin with *PT*. The sensors are labeled with:
+
 
 + `C6H6`: (log) Benzene concentrations (in microg/m^3),
 + `CO`: (log) Carbon monoxide (in mg/m^3), 
@@ -143,16 +130,8 @@ The Air Quality dataset (AQI) from the UCI repository [@Qi2019]. AQI is a popula
 + `rH``: humidity  (in percentage).
 
 
-=======
-Our last example is the Air Quality dataset (AQI) available from the UCI machine learning repository @Qi2019. AQI is a popular dataset consisting of five metal oxide chemical sensors embedded into an air quality multisensor device. 
-<!--The column names in the dataset begin with *PT*. --> The sensors are labeled with:
 
-+ Carbon monoxide (`CO`), 
-+ Non-methane hydrocarbons (`NMHC`), 
-+ Total Nitrogen Oxides (`NOx`), 
-+ Ozone (`O3`) 
 because it is supposed that its measures are related with the respective pollutants. 
->>>>>>> 4dcc6930e1e0b80b9bed21cba4c6d15809c95b49
 
 ```{r , eval =T,message=F,warning=F}
 data("AirQuality")
@@ -177,38 +156,10 @@ lines(func.mean(AirQuality$C6H6))
 ```
 
 
-```{r , eval =F,message=F,warning=F,echo=FALSE}
-listfinal <- AirQuality #eliminar o reutilizar
-dim(listfinal$df)
-al=lapply(listfinal[-1],function(v) which(fda.usc:::is.na.fdata(v)))
-al=unique(rapply(al,drop))
-listfinal=subset(listfinal,-al)
-dim(listfinal$df)
-
-par(mfrow=c(2,3))
-plot(listfinal$NMHC,col="grey")
-lines(func.mean(listfinal$NMHC))
-plot(listfinal$CO,col="grey")
-lines(func.mean(listfinal$CO))
-plot(listfinal$NOx,col="grey")
-lines(func.mean(listfinal$NMHC))
-plot(listfinal$O3,col="grey")
-lines(func.mean(listfinal$O3))
-plot(AirQuality$RH,col="grey")
-lines(func.mean(listfinal$RH))
-plot(listfinal$C6H6,col="grey")
-lines(func.mean(listfinal$C6H6))
-```
-
-<<<<<<< HEAD
 The goal of this study is to predict the content of Benzene (`C6H6`) obtained through an independent analyzer considered the Ground Truth. 
-These sensors were collected as 24 hourly averaged concentration values each day jointly with the temperature  (`Temp`) and relative humidity (`rH`)  as a external factors. 
-=======
-The goal of this study is to predict the content of (log transformation of) Benzene (`C6H6`)  obtained through an independent analyzer considered the Ground Truth. 
 These sensors were collected as 24 hourly averaged concentration values each day jointly with the relative humidity (`rH`) as an external factor. 
->>>>>>> 4dcc6930e1e0b80b9bed21cba4c6d15809c95b49
 
-+ `/RealDataApplications/AirQuality.R`: Code for  AirQuality data example (high computational time)
++ `/RealDataApplications/AirQuality.R`: Code for  Bike--sharing data example (high computational time)
 
 ```{r , eval = F}
 source("/RealDataApplications/AirQuality.R")
@@ -217,13 +168,10 @@ source("/RealDataApplications/AirQuality.R")
  
 ## 2. Bike-sharing Data
 
-<<<<<<< HEAD
 To illustrate how our proposed function-on-function methods work, we use the Bike-sharing data [@Fanaee-T2014]. This dataset is collected by [Capital Bikeshare System (CBS), Washington D.C., USA](https://ride.capitalbikeshare.com/system-data).
 The number of casual bike rentals (`NCBR`) is considered as our functional response variable and four functional predictors: 
-=======
-To illustrate how our proposed function-on-function methods work, we use the Bike-sharing data [@Fanaee-T2014] as our first example. This dataset is collected by [Capital Bikeshare System (CBS), Washington D.C., USA](https://ride.capitalbikeshare.com/system-data).
-The logaritmo of number of casual bike rentals (`NCBR`) is considered as our functional response  variable (`log(NCBR+1)`)  and four functional predictors: 
->>>>>>> 4dcc6930e1e0b80b9bed21cba4c6d15809c95b49
+
+
 
 + `T`: Temperature (in Celsius), 
 + `H`:  Humidity (in percentage).
@@ -231,7 +179,6 @@ The logaritmo of number of casual bike rentals (`NCBR`) is considered as our fun
 + `FT`: Feeling Temperature (normalized)
 
 
-<<<<<<< HEAD
 ```{r , eval = F}
 data("BikeSharing")
 names(BikeSharing)
@@ -239,15 +186,6 @@ names(BikeSharing)
 ```
 
 The corresponding plots are displayed in Figure. 
-=======
-`data("BikeSharing")` included in `fda.usc.devel` packages:
-
-```{r , eval = T}
-data("BikeSharing")
-```
-
-The corresponding plots are displayed in Figure 5 of paper. 
->>>>>>> 4dcc6930e1e0b80b9bed21cba4c6d15809c95b49
 
 
 ```{r , eval=T, message=F, warning=F, echo=FALSE}
@@ -286,7 +224,7 @@ These variables are recorded each hour from January 1, 2011, to December 31, 201
 
 + `/RealDataApplications/BikeSharing.R`: Code for example Air Quality
 
-```{r , eval=F, message=F, warning=F}
+```{r , eval =F,message=F,warning=F}
 source("/RealDataApplications/BikeSharing.R")
 ```
 
@@ -300,7 +238,6 @@ Daily profiles of Electricity Price  and Demand, both measured hourly, are obtai
 
 + `/RealDataApplications/omie2008vs2018.R`: Code for Electricity Demand and Price example.
 
-<<<<<<< HEAD
 ```{r , eval = F}
 data(omel2008_09)
 names(omel2008_09)
@@ -311,31 +248,15 @@ names(omel2008_19)
 ```
 
 The corresponding plots are displayed in Figure. 
-=======
-```{r , eval = T}
-data(omel2008_09)
-names(omel2008_09)
-
-```
-
-The corresponding plots are displayed in Figure 6 of paper. 
->>>>>>> 4dcc6930e1e0b80b9bed21cba4c6d15809c95b49
 
 ```{r , eval =T,message=F,warning=F,echo=FALSE}
 data(omel2008_09)
 ldat <- omel2008_09
 par(mfrow=c(2,2))
-<<<<<<< HEAD
 plot(ldat$Pr,col="grey")
 lines(func.mean(ldat$Pr),lwd=2)
 plot(ldat$En,col="grey")
 lines(func.mean(ldat$En),lwd=2)
-=======
-plot(omel2008_09$Pr,col="grey")
-lines(func.mean(omel2008_09$Pr),lwd=2)
-plot(omel2008_09$En,col="grey")
-lines(func.mean(omel2008_09$En),lwd=2)
->>>>>>> 4dcc6930e1e0b80b9bed21cba4c6d15809c95b49
 data(omel2018_19)
 plot(omel2018_19$Pr,col="grey")
 lines(func.mean(omel2018_19$Pr),lwd=2)
@@ -343,19 +264,7 @@ plot(omel2018_19$En,col="grey")
 lines(func.mean(omel2018_19$En),lwd=2)
 ```
 
-<<<<<<< HEAD
-<!-- # library(lubridate) -->
-<!-- # plot(ldat$Pr,col=year(ldat$df$ifecha)-2007) -->
-<!-- # plot(ldat$En,col=year(ldat$df$ifecha)-2007) -->
-<!-- # data(omel2018) -->
-<!-- # omel2018 <- ldat -->
-<!-- # plot(omel2018$Pr,col=year(omel2018$df$ifecha)-2015) -->
-<!-- # plot(omel2018$En,col=year(omel2018$df$ifecha)-2015) -->
 
-
-
-=======
->>>>>>> 4dcc6930e1e0b80b9bed21cba4c6d15809c95b49
 Profiles for Electricity Demand (first row) and Electricity Price (second row) for the periods 2008-09 (first column) and 2018-19 (second column). The black line corresponds to the functional mean of each dataset.
 
 + `/RealDataApplications/omie2008vs2018.R`: Code for Electricity Demand and Price example.
@@ -364,7 +273,6 @@ Profiles for Electricity Demand (first row) and Electricity Price (second row) f
 source("/RealDataApplications/Exampleomel.R")
 ```
 
-<<<<<<< HEAD
 <!--
 + Exampleomel.R: Code for Electricity Demand and Price example.
 
@@ -391,9 +299,3 @@ source("/RealDataApplications/Exampleomel.R")
 
 
 -->
-=======
-
-
-## References
-
->>>>>>> 4dcc6930e1e0b80b9bed21cba4c6d15809c95b49
